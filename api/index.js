@@ -21,3 +21,5 @@ app.use(boomErrorHandler);
 app.listen(port, () => {
   console.log('My port: ' + port);
 });
+
+module.exports = app;
