@@ -1,4 +1,3 @@
-const removeDuplicates = require('../utils/removeDuplicates')
 const boom = require('@hapi/boom');
 
 class HotelsService {
@@ -168,6 +167,10 @@ class HotelsService {
     }
     return this.hotels
   }
+}
+
+function removeDuplicates(arr) {
+  return arr.filter((item, index) => arr.indexOf(item) === index);
 }
 
 module.exports = HotelsService;
