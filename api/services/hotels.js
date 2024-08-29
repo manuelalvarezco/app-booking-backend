@@ -1,5 +1,3 @@
-const boom = require('@hapi/boom');
-
 class HotelsService {
   hotels = [
     {
@@ -153,7 +151,7 @@ class HotelsService {
     if (indexHotel >= 0) {
       this.hotels[indexHotel] = { ...hotel, id:  Number(id), active: true };
     } else {
-      throw boom.notFound('Hotel no encontrado');
+      throw new Error('Hotel no encontrado');
     }
     return this.hotels;
   }
@@ -163,7 +161,7 @@ class HotelsService {
     if (indexHotel >= 0) {
       this.hotels[indexHotel] = { ...hotel, id:  Number(id), active: !hotel.active };
     } else {
-      throw boom.notFound('Hotel no encontrado');
+      throw new Error('Hotel no encontrado');
     }
     return this.hotels
   }
