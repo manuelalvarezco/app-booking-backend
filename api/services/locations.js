@@ -1,6 +1,7 @@
 require('dotenv').config();
 const UNIVERSAL_API = process.env.UNIVERSAL_API;
 const API_TOKEN = process.env.API_TOKEN;
+const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 const USER_EMAIL = process.env.USER_EMAIL;
 
 class ReservesService {
@@ -21,27 +22,27 @@ class ReservesService {
     const options = {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
     };
     return await fetch(`${UNIVERSAL_API}/countries`, options);
   }
 
-  async findStates(token, country) {
+  async findStates(country) {
     const options = {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
     };
     return await fetch(`${UNIVERSAL_API}/states/${country}`, options);
   }
 
-  async findCities(token, city) {
+  async findCities(city) {
     const options = {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
     };
     return await fetch(`${UNIVERSAL_API}/cities/${city}`, options);
