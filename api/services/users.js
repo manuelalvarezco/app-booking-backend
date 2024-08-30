@@ -24,7 +24,7 @@ class UsersService {
     return this.users.find(user => user.id === Number(id));
   }
 
-  async create() {
+  async create(user) {
     this.users.push({
       ...user,
       active: true,

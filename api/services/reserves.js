@@ -4,7 +4,7 @@ class ReservesService {
   async create(reserve) {
     this.reserves.push({
       ...reserve,
-      id: this.hotels.length + 1,
+      id: this.reserves.length + 1,
     });
     return this.reserves;
   }
