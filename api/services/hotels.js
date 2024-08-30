@@ -8,8 +8,7 @@ class HotelsService {
   }
 
   async find(query) {
-    const hotels = await Hotel.find();
-    return hotels;
+    return query?.limit ? await Hotel.find().limit(query.limit) : await Hotel.find();
   }
 
   async findOne(_id) {
