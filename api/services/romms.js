@@ -17,7 +17,7 @@ class RommsService {
   }
 
   async findByHotelId(id) {
-    return await Romm.find({ hotel: id });
+    return await Romm.find({ hotel: id, active: true });
   }
 
   async update(_id, romm) {
