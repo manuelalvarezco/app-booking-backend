@@ -4,13 +4,14 @@ require('dotenv').config();
 const ReservesService = require('../services/locations');
 const service = new ReservesService();
 
-
-const UNIVERSAL_API = process.env.UNIVERSAL_API;
-
 router.get('/getAccesstoken', async (req, res, next) => {
   try {
     const response = await service.getAccesstoken();
+
     const data = await response.json();
+
+    console.log('data', data);
+
     res.json(data);
   } catch (error) {
     next(error);
@@ -19,6 +20,8 @@ router.get('/getAccesstoken', async (req, res, next) => {
 
 router.get('/countries', async (req, res, next) => {
   const token = req.headers.token;
+  console.log('token', token);
+
   try {
     const response = await service.findCountries(token);
     const data = await response.json();
