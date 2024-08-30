@@ -3,10 +3,7 @@ const mongoose = require('mongoose');
 
 const dbConect = async () => {
   try {
-    console.log('process.env.MONGODB_CDN', process.env.MONGODB_CDN);
-
     await mongoose.connect(process.env.MONGODB_CDN, {
-      useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     console.log('Base de datos online');
