@@ -19,7 +19,7 @@ const HotelSchema = Schema({
   },
   rating: {
     type: Number,
-    required: true,
+    default: 4.5
   },
   price: {
     type: Number,
