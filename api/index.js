@@ -1,4 +1,5 @@
 const express = require('express');
+const dbConnection = require('./database/config');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -13,12 +14,16 @@ app.get('/api', (req, res) => {
   res.send('This is a REST API for app-booking-app');
 });
 
+dbConnection();
+
 routerApi(app);
+
+
 app.use(logErrors);
 app.use(hendleError);
 
 app.listen(port, () => {
-  console.log('My port: ' + port);
+  console.log('Servicio corriendo en el puerto: ' + port);
 });
 
 module.exports = app;

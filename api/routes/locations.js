@@ -1,22 +1,15 @@
 const express = require('express');
 const router = express.Router();
 require('dotenv').config();
+const ReservesService = require('../services/locations');
+const service = new ReservesService();
+
 
 const UNIVERSAL_API = process.env.UNIVERSAL_API;
-const API_TOKEN = process.env.API_TOKEN;
-const USER_EMAIL = process.env.USER_EMAIL;
-const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 
 router.get('/getAccesstoken', async (req, res, next) => {
-  const options = {
-    method: 'GET',
-    headers: {
-      'api-token': API_TOKEN,
-      'user-email': USER_EMAIL,
-    },
-  };
   try {
-    const response = await fetch(`${UNIVERSAL_API}/getaccesstoken`, options);
+    const response = await service.getAccesstoken();
     const data = await response.json();
     res.json(data);
   } catch (error) {
@@ -25,14 +18,9 @@ router.get('/getAccesstoken', async (req, res, next) => {
 });
 
 router.get('/countries', async (req, res, next) => {
-  const options = {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
-    },
-  };
+  const token = req.headers.token;
   try {
-    const response = await fetch(`${UNIVERSAL_API}/countries`, options);
+    const response = await service.findCountries(token);
     const data = await response.json();
     res.json(data);
   } catch (error) {
@@ -41,15 +29,10 @@ router.get('/countries', async (req, res, next) => {
 });
 
 router.get('/states/:country', async (req, res, next) => {
+  const token = req.headers.token;
   const { country } = req.params;
-  const options = {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
-    },
-  };
   try {
-    const response = await fetch(`${UNIVERSAL_API}/states/${country}`, options);
+    const response = await service.findStates(token, country);
     const data = await response.json();
     res.json(data);
   } catch (error) {
@@ -58,15 +41,10 @@ router.get('/states/:country', async (req, res, next) => {
 });
 
 router.get('/cities/:city', async (req, res, next) => {
+  const token = req.headers.token;
   const { city } = req.params;
-  const options = {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
-    },
-  };
   try {
-    const response = await fetch(`${UNIVERSAL_API}/cities/${city}`, options);
+    const response = await service.findCities(token, city);
     const data = await response.json();
     res.json(data);
   } catch (error) {

@@ -1,20 +1,21 @@
+const Reserve = require('../models/reserve');
+
 class ReservesService {
   reserves = [];
 
-  async create(reserve) {
-    this.reserves.push({
-      ...reserve,
-      id: this.reserves.length + 1,
-    });
-    return this.reserves;
+  async create(body) {
+    const reserve = new Reserve(body);
+    return await reserve.save();
   }
 
   async find() {
-    return this.reserves;
+    const reserves = await Reserve.find();
+    return reserves;
   }
 
   async findByUserId(userId) {
-    return response.find(reserve => reserve.userId === Number(userId));
+    const reserves = await Reserve.find({ userId: { $eq: userId } });
+    return reserves;
   }
 }
 
